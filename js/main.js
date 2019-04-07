@@ -1,78 +1,76 @@
 console.log("O arquivo javascript main.js foi carregado");
 
-var tempoInicial = $("#tempo-digitacao").text();
-var campo = $(".campo-digitacao");
+const tempoInicial = $("#tempo-digitacao").text();
+const campo = $(".campo-digitacao");
 
-//atalho para: $(document).ready(function(){})
-$(function(){
+// atalho para: $(document).ready(function(){})
+$(function() {
   atualizaTamanhoFrase();
   inicializaContadores();
   inicializaCronometro();
   inicializaMarcadores();
-  //atalho para: (...).on("click", function(){})
+  // atalho para: (...).on("click", function(){})
   $("#botao-reiniciar").click(reiniciaJogo);
-})
+});
 
-function atualizaTamanhoFrase(){
-  var frase = $(".frase").text();
-  var numPalavras = frase.split(" ").length;
-  var tamanhoFrase = $("#tamanho-frase");
+function atualizaTamanhoFrase() {
+  const frase = $(".frase").text();
+  const numPalavras = frase.split(" ").length;
+  const tamanhoFrase = $("#tamanho-frase");
   tamanhoFrase.text(numPalavras);
 }
 
-function inicializaContadores(){
-  campo.on("input", function(){
-    var conteudo = campo.val();
+function inicializaContadores() {
+  campo.on("input", function() {
+    const conteudo = campo.val();
 
-    var qtdPalavras = conteudo.split(/\S+/).length -1;
+    const qtdPalavras = conteudo.split(/\S+/).length - 1;
     $("#contador-palavras").text(qtdPalavras);
 
-    var qtdCaracteres = conteudo.length;
+    const qtdCaracteres = conteudo.length;
     $("#contador-caracteres").text(qtdCaracteres);
   });
 }
 
-function inicializaMarcadores(){
+function inicializaMarcadores() {
+  const frase = $(".frase").text();
 
-  var frase = $(".frase").text();
+  campo.on("input", function() {
+    const digitado = campo.val();
+    const comparavel = frase.substr(0, digitado.length);
 
-  campo.on("input", function(){
-    var digitado = campo.val();
-    var comparavel = frase.substr(0, digitado.length);
-
-    if(digitado == comparavel){
+    if (digitado === comparavel) {
       campo.addClass("borda-verde");
-      campo.removeClass("borda-vermelha")
-    } else{
+      campo.removeClass("borda-vermelha");
+    } else {
       campo.addClass("borda-vermelha");
       campo.removeClass("borda-verde");
     }
   });
 }
 
-function inicializaCronometro(){
+function inicializaCronometro() {
+  let tempoRestante = Number($("#tempo-digitacao").text());
 
-  var tempoRestante = $("#tempo-digitacao").text();
-
-  campo.one("focus", function() {
-    var cronometroID = setInterval(function(){
+  campo.one("keydown", function() {
+    const cronometroID = setInterval(function() {
       tempoRestante--;
       $("#tempo-digitacao").text(tempoRestante);
-      if (tempoRestante < 1){
+      if (tempoRestante < 1) {
         finalizaJogo();
-        clearInterval(cronometroID)};
+        clearInterval(cronometroID);
+      }
     }, 1000);
   });
 }
 
-function finalizaJogo(){
+function finalizaJogo() {
   campo.attr("disabled", true);
   campo.toggleClass("campo-desativado");
   inserePlacar();
 }
 
-function reiniciaJogo(){
-
+function reiniciaJogo() {
   campo.attr("disabled", false);
   campo.val("");
   campo.toggleClass("campo-desativado");
