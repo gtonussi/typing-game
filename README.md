@@ -1,12 +1,6 @@
 # typing-game-alura
 
-function recursosUsados(jquery){
-  manipulação do DOM;
-  animações js+css;
-  materialize css;
-  ajax;
-  json;
- }
+function recursosUsados(jquery){manipulação do DOM; animações js+css; materialize css; ajax; json;}
   
 ----------
 
