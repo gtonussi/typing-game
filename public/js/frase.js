@@ -2,7 +2,7 @@ console.log("O arquivo javascript frase.js foi carregado");
 
 $("#botao-frase").click(fraseAleatoria);
 
-$("#    botao-frase-id").click(buscaFrase);
+$("#botao-frase-id").click(buscaFrase);
 
 function fraseAleatoria() {
     $("#spinner").toggle();
@@ -52,3 +52,5 @@ function trocaFrase(data){
     atualizaTamanhoFrase();
     atualizaTempoInicial(data.tempo);
 }
+
+

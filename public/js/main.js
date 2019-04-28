@@ -11,6 +11,7 @@ $(function(){
   inicializaMarcadores();
   //atalho para: (...).on("click", function(){})
   $("#botao-reiniciar").click(reiniciaJogo);
+  atualizaPlacar();
 })
 
 function atualizaTempoInicial(tempo) {
